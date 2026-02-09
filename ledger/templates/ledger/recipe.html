@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <h3>{{ name }}</h3>
+    Ingredients:
+    <ul>
+        {% for ingredient in ingredients %}
+        <li>{{ ingredient.quantity }} of {{ ingredient.name }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

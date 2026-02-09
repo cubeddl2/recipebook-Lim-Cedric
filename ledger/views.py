@@ -71,8 +71,7 @@ def recipes_list(request):
     }
     return render(request, "ledger/recipes_list.html", ctx)
 
-def recipe(request, id):
-    if id == 1:
+def recipe_1(request):
         ctx =   {
                     "name": "Recipe 1",
                     "ingredients": [
@@ -99,7 +98,9 @@ def recipe(request, id):
                     ],
                     "link": "/recipe/1"
                 }
-    elif id == 2:
+        return render(request, "ledger/recipe.html", ctx)
+
+def recipe_2(request):
         ctx =   {
                     "name": "Recipe 2",
                     "ingredients": [
@@ -134,3 +135,4 @@ def recipe(request, id):
                     ],
                     "link": "/recipe/2"
                 }
+        return render(request, "ledger/recipe.html", ctx)
