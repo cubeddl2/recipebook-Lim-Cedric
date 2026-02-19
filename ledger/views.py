@@ -1,5 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from .models import RecipeIngredient
+
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 
 def index(request):
     return HttpResponse('Hello World! This came from the index view')
