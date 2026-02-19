@@ -2,11 +2,11 @@
 {% load static %}
 
 {% block content %}
-    <h3>{{ name }}</h3>
+    <h3>{{ recipe.name }}</h3>
     Ingredients:
     <ul>
-        {% for ingredient in Recipe.objects.get(pk=1).ingredients.all %}
-        <li>{{ ingredient.quantity }} of {{ ingredient.name }}</li>
+        {% for ingredient in recipe.ingredients.all %}
+        <li>{{ ingredient.quantity }} unit of {{ ingredient.ingredient.name }}</li>
         {% endfor %}
     </ul>
 {% endblock %}
