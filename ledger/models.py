@@ -6,7 +6,7 @@ class Ingredient(models.Model):
 
     def __str__(self):
         return '{}'.format(self.name)
-    
+
     def get_absolute_url(self):
         return reverse('ledger:recipe', args=[str(self.name)])
 
@@ -21,6 +21,13 @@ class Recipe(models.Model):
 
 class RecipeIngredient(models.Model):
     quantity = models.PositiveIntegerField()
-    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE, related_name="recipe")
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name="ingredients")
-
+    ingredient = models.ForeignKey(
+        Ingredient, 
+        on_delete=models.CASCADE, 
+        related_name="recipe"
+        )
+    recipe = models.ForeignKey(
+        Recipe, 
+        on_delete=models.CASCADE, 
+        related_name="ingredients"
+        )

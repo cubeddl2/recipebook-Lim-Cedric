@@ -8,4 +8,4 @@ urlpatterns = [
     path('recipe/<int:pk>', RecipeDetailView.as_view(), name='recipe'),
 ]
 
-app_name="ledger"
+app_name = "ledger"

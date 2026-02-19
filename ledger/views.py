@@ -16,7 +16,7 @@ def recipes_list(request):
     return render(request, "ledger/recipes_list.html", ctx)
 
 def recipe(request, id):
-    ctx = { 'recipe', RecipeIngredient.objects.get(id=id)}
+    ctx = {'recipe', RecipeIngredient.objects.get(id=id)}
     return render(request, "ledger/recipe.html", ctx)
 
 class RecipeDetailView(DetailView):
@@ -26,3 +26,4 @@ class RecipeDetailView(DetailView):
 class RecipesListView(ListView):
     model = Recipe
     template_name = 'ledger/recipes_list.html'
+    
