@@ -7,16 +7,17 @@ from django.core.validators import MinLengthValidator
 class Profile (models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
-    shortBio = models.TextField(validators=[MinLengthValidator(255, "The field must contain at least 255 characters!")])
+    shortBio = models.TextField(validators=[MinLengthValidator(255,
+                                            "The field must contain at least 255 characters!")])
 
     def __str__(self):
         return self.user.username
-    
+
 class Ingredient(models.Model):
     name = models.CharField(max_length=100)
 
     def __str__(self):
-        return '{}'.format(self.name)
+        return self.name
 
     def get_absolute_url(self):
         return reverse('ledger:recipe', args=[str(self.name)])
@@ -34,11 +35,11 @@ class Recipe(models.Model):
     updatedOn = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return '{}'.format(self.name)
-    
+        return self.name
+
     def get_absolute_url(self):
         return reverse('ledger:recipe', kwargs={'pk' : self.pk})
-    
+
     class Meta: 
         ordering = ['name']
         verbose_name = 'recipe'
@@ -48,16 +49,15 @@ class Recipe(models.Model):
 class RecipeIngredient(models.Model):
     quantity = models.PositiveIntegerField()
     ingredient = models.ForeignKey(
-        Ingredient, 
-        on_delete=models.CASCADE, 
+        Ingredient,
+        on_delete=models.CASCADE,
         related_name="recipe"
         )
     recipe = models.ForeignKey(
-        Recipe, 
+        Recipe,
         on_delete=models.CASCADE, 
         related_name="ingredients"
         )
 
     def __str__(self):
         return '{}x {} from {}'.format(self.quantity, self.ingredient.name, self.recipe.name)
-    

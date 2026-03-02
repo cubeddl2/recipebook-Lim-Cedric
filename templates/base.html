@@ -7,7 +7,15 @@
     </head>
 
     <body>
-        {% block header %}<a href="../recipes/list"><h2>Recipe Book</h2></a>{% endblock %}
+        {% block header %}<a href="/recipes/list"><h2>Recipe Book</h2></a>{% endblock %}
         {% block content %}{% endblock %}
+
+        {% if user.is_authenticated %}
+            {% include 'registration/logout.html' %}
+        {% else %}
+            {% block login %}
+                <a href = "{% url 'login' %}">Login</a>
+            {% endblock %}
+        {% endif %}
     </body>
 </html>

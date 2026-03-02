@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}Login{% endblock %}
-{% block content %}
+{% block login %}
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
