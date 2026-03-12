@@ -61,3 +61,14 @@ class RecipeIngredient(models.Model):
 
     def __str__(self):
         return '{}x {} from {}'.format(self.quantity, self.ingredient.name, self.recipe.name)
+
+class RecipeImage(models.Model):
+    image = models.ImageField(upload_to='media/images/', null=False)
+    description = models.TextField(max_length=255)
+    recipe = models.ForeignKey(
+        Recipe,
+        on_delete = models.CASCADE,
+        related_name = "image",
+        null = True,
+        blank = True
+    )

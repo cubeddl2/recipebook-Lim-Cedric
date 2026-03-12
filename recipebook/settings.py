@@ -121,8 +121,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
+STATICFILES_DIRS = [
+    BASE_DIR/'static',
+]
+
 STATIC_URL = os.getenv('STATIC_URL')
-STATIC_ROOT = [os.path.join(BASE_DIR, 'static')]
+#STATIC_ROOT = [os.path.join(BASE_DIR, 'static')]
 
 LOGIN_REDIRECT_URL = '/recipes/list'
 LOGOUT_REDIRECT_URL = '/accounts/login'
+
+MEDIA_ROOT = BASE_DIR/'media'
+MEDIA_URL = os.getenv("MEDIA_URL")
