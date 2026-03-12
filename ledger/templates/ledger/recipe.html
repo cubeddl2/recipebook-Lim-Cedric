@@ -1,9 +1,16 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block styles %}<link rel="stylesheet" href="{% static 'css/main.css' %}" type="text/css"> {% endblock %}
+
 {% block content %}
     <h3>{{ recipe.name }}</h3>
-    <h4>Author: {{ recipe.author.name }}</h4>
+    <h4>Author: {{ recipe.author.name }} {{ recipe.image.image.description }}</h4>
+    {% for image in recipe.image.all %}
+        <img src="{{ image.image.url }}" alt="{{ image.description }}">
+    {% endfor %}
+    </br>
+    </br>
     Ingredients:
     <ul>
         {% for ingredient in recipe.ingredients.all %}
