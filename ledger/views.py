@@ -1,7 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from .models import RecipeIngredient, Recipe
-from .forms import RecipeForm
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.list import ListView
