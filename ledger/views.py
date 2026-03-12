@@ -1,10 +1,12 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from .models import RecipeIngredient, Recipe
+from .forms import RecipeForm
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
+from django.views.generic import CreateView, FormView, UpdateView
 
 def index(request):
     return HttpResponse('Hello World! This came from the index view')
@@ -28,3 +30,8 @@ class RecipeDetailView(LoginRequiredMixin, DetailView):
 class RecipesListView(ListView):
     model = Recipe
     template_name = 'ledger/recipes_list.html'
+
+class RecipeCreateView(LoginRequiredMixin, CreateView):
+    model = Recipe
+    fields = '__all__'
+    template_name = 'ledger/recipe_add.html'
