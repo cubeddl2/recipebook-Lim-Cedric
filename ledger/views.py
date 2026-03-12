@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from .models import RecipeIngredient, Recipe
+from django.urls import reverse_lazy
+from .models import RecipeIngredient, Recipe, RecipeImage, Profile
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.list import ListView
@@ -32,5 +33,21 @@ class RecipesListView(ListView):
 
 class RecipeCreateView(LoginRequiredMixin, CreateView):
     model = Recipe
-    fields = '__all__'
+    fields = ['name']
     template_name = 'ledger/recipe_add.html'
+
+    def form_valid(self,form):
+        form.instance.author = Profile.objects.get(user=self.request.user)
+        return super().form_valid(form)
+
+class RecipeImageCreateView(LoginRequiredMixin, CreateView):
+    model = RecipeImage
+    fields = ['image', 'description']
+    template_name = 'ledger/recipe_image_add.html'
+
+    def form_valid(self, form):
+        form.instance.recipe = Recipe.objects.get(pk=self.kwargs['pk'])
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('ledger:recipe', kwargs={'pk': self.kwargs['pk']})
